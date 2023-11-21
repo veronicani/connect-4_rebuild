@@ -80,14 +80,25 @@ class Game {
    * Input: x - an integer, representing the chosen column number.
    * 
    * Returns: 
-   *   - true, if a current player's piece has been placed in an available spot.
+   *   - [y, x] - coordinates of the newly played piece if there is an available spot.
    *   - false, if all spots of the column are filled, and player has not placed piece.
   */
   findSpotInCol(x) {
+    console.log("starting findSpotInCol");
     //check each row of the board at the index of x, starting from the bottom
-    //if there is a 'null', replace with current player, return true
-
+    for (let y = this.numRows - 1; y >= 0; y--) {
+      //if there is a 'null', replace with current player, return the [x,y] positon
+      console.log('search coords: ', `(${y},${x})`);
+      if (this.board[y][x] === null) {
+        this.board[y][x] = this.currPlayer.name;
+        console.log('new piece coordinates: ', `(${y},${x})`);
+        console.log('updated board: ', this.board);
+        return [y, x];
+      }
+    }
     //if reached top, return false;
+    console.log("no space available");
+    return false;
   }
 
   /** A function that checks if there is a winning move made by the current player.
@@ -124,23 +135,23 @@ class Game {
     
   }   
 
-  /** A function that triggers a sequence of events based on where the 
-   *   current player chooses to place their piece.
-   * After the player has placed a piece, it will check if the player has won.
-   *   If so, it will end the game.
-   * If there are still available spots on the board, it will switch 
-   *   the current player.
-  */
-  executeMove(x) {
-    //if findSpotInCol => false
-    //return
-    //check if there is a winner
-    //if yes, end the game with the winner -- delay this by 1 sec so HTML can update
-      //return 
-    //check if there are still board spots avail
-      //if so, switch current player
-      //else, end the game w/o a winner -- delay this by 1 sec so HTML can update
-  }
+  // /** A function that triggers a sequence of events based on where the 
+  //  *   current player chooses to place their piece.
+  //  * After the player has placed a piece, it will check if the player has won.
+  //  *   If so, it will end the game.
+  //  * If there are still available spots on the board, it will switch 
+  //  *   the current player.
+  // */
+  // executeMove(x) {
+  //   //if findSpotInCol => false
+  //   //return
+  //   //check if there is a winner
+  //   //if yes, end the game with the winner -- delay this by 1 sec so HTML can update
+  //     //return 
+  //   //check if there are still board spots avail
+  //     //if so, switch current player
+  //     //else, end the game w/o a winner -- delay this by 1 sec so HTML can update
+  // }
 }
 
 /**TODO: describe Player class */

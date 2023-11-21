@@ -25,7 +25,8 @@ const $topRow = $(".top-cell");
  * Accepts: the current Game instance
 */
 function makeHtmlBoard(game) {
-  
+  $gameBoard.empty();
+
   const $thead = $("<thead>")
     .appendTo($gameBoard);
   const $headRow = $("<tr>")
@@ -34,7 +35,7 @@ function makeHtmlBoard(game) {
   for (let col = 0; col < currentGame.numCols; col++) {
     const $topCell = $("<th>")
       .addClass("top-cell")
-      .attr("id", `top-${col}`)
+      .attr("id", `t-${col}`)
       .appendTo($headRow);
   }
 
@@ -47,6 +48,7 @@ function makeHtmlBoard(game) {
     for (let col = 0; col <currentGame.numCols; col++) {
       const $bodyCell = $("<td>")
         .addClass("body-cell")
+        .attr("id", `b-${row}${col}`)
         .appendTo($bodyRow);
     }
   }
@@ -61,6 +63,27 @@ function makeHtmlBoard(game) {
 function handleTopRowClick(evt) {
   console.log("starting handleTopRowClick");
 
+  console.log("evt target id: ", evt.target.id);
+  
+  const clickedColNum = Number(evt.target.id.replace("t-", ""));
+
+  const updatedCoords = currentGame.findSpotInCol(clickedColNum);
+  if (updatedCoords) {
+    const [y, x] = updatedCoords;
+    console.log("y: ", y, "x: ", x);
+    //create a piece, using current player's color,
+    //add the piece to the corresponding board cell via id
+    const $piece = $("<div>")
+      .addClass("piece")
+      .css("background-color", `${currentGame.currPlayer.color}`)
+      .appendTo(`#b-${y}${x}`);
+
+    //FIXME: fix so that players switch
+    currentGame.currPlayer = currentGame.players[0] ? currentGame.players[1]
+      : currentGame.players[0];
+  }
+
+  
 }
 
 /** A function that handles UI for ending the game. 
