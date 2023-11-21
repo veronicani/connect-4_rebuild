@@ -1,14 +1,14 @@
-"use strict";
 
+"use strict";
 /** Game class: provides functionality for creating a game instance
  *    and handling non-UI game logic.
  *
  *  Game will have:
  *  - numRows: number of rows for game board (int)
  *  - numCols: number of columns for game board (int)
- *  - players: an array of player variables, assigned to Player instances
- *      [p1, p2]
- *  - currPlayer: variable of current player
+ *  - players: an array of Player instances
+ *      [{name: 'p1', color: 'tomato'}, {name: 'p2', color: 'green'}]
+ *  - currPlayer: instance of the current player
  *  - board: a matrix for the current game, an array of [numRows] rows, 
  *     with [numCols] values. Each value will either be 'null' (for no piece placed),
  *     or the player variable of the piece placed.
@@ -23,11 +23,11 @@
     - winner: variable of the winning player
  */
 class Game {
-  constructor(numRows = 6, numCols = 7, numPlayers = 2) {
+  constructor(numRows = 6, numCols = 7) {
     this.numRows = numRows;
     this.numCols = numCols;
-    this.players = this.getPlayers(numPlayers);
-    this.currPlayer = p1;
+    this.players = this.getPlayers();
+    this.currPlayer = this.players[0];
     this.board = this.makeBoard();
     this.winner = null;
   }
@@ -48,9 +48,24 @@ class Game {
       ];
    */
   makeBoard() {
-    //do something
+    //
 
   }
+
+  /** This function gets (currently only 2) new Player instances 
+   *   and assigns them to variables.
+   * 
+   * Accepts: number of players (integer)
+   * 
+   * Returns: An array of player variables, each assigned to a Player instance
+   */
+  getPlayers() {
+    const p1 = Player.makePlayer("p1", $player1Input.val());
+    const p2 = Player.makePlayer("p2", $player2Input.val());
+    console.log('p1: ', p1, 'p2: ', p2);
+    return [p1, p2];
+  }
+
   /** A function that finds the next available spot for the column
    * in the board the current player clicks to drop their piece in, 
    * and updates the board with the current player's piece. 
@@ -120,3 +135,20 @@ class Game {
       //else, end the game w/o a winner -- delay this by 1 sec so HTML can update
   }
 }
+
+/**TODO: describe Player class */
+class Player {
+  constructor(name, color) {
+    this.name = name;
+    this.color = color;
+  }
+
+  /** Creates a new Player instance*/
+  static makePlayer(name, color) {
+    console.log('player name: ', name);
+    console.log('player color: ', color);
+    return new Player(name, color);
+  }
+}
+
+
