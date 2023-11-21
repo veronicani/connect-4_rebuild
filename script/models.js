@@ -98,7 +98,7 @@ class Game {
     }
     //if reached top, return false;
     console.log("no space available");
-    return false;
+    return undefined;
   }
 
   /** A function that checks if there is a winning move made by the current player.

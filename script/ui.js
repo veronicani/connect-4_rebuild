@@ -60,6 +60,8 @@ function makeHtmlBoard(game) {
  * 
  * Accepts: the event of clicking on a cell in the top row of the HTML board.
  */
+
+//TODO: move functions to be in Game class?
 function handleTopRowClick(evt) {
   console.log("starting handleTopRowClick");
 
@@ -68,22 +70,48 @@ function handleTopRowClick(evt) {
   const clickedColNum = Number(evt.target.id.replace("t-", ""));
 
   const updatedCoords = currentGame.findSpotInCol(clickedColNum);
-  if (updatedCoords) {
-    const [y, x] = updatedCoords;
-    console.log("y: ", y, "x: ", x);
-    //create a piece, using current player's color,
-    //add the piece to the corresponding board cell via id
-    const $piece = $("<div>")
-      .addClass("piece")
-      .css("background-color", `${currentGame.currPlayer.color}`)
-      .appendTo(`#b-${y}${x}`);
-
-    //FIXME: fix so that players switch
-    currentGame.currPlayer = currentGame.players[0] ? currentGame.players[1]
-      : currentGame.players[0];
+  if (updatedCoords === undefined) {
+    return;
   }
 
+  placeHtmlPiece(updatedCoords);
   
+  const winner = currentGame.checkForWin();
+
+  //when the top row doesn't have null, board is full
+  const boardIsFull = !currentGame.board[0].includes(null);
+  console.log("boardIsFull: ", boardIsFull);
+  if (winner) {
+    console.log('winner!');
+    setTimeout(endGame, 1000);
+  } else if (boardIsFull){
+    console.log('board is full!'); 
+    setTimeout(endGame, 1000);
+  }
+
+  currentGame.currPlayer = currentGame.currPlayer === currentGame.players[0] 
+    ? currentGame.players[1] 
+    : currentGame.players[0];
+
+  console.log('switched current Player: ', currentGame.currPlayer);
+}
+
+/** This function places the current player's piece in the HTML board.
+ * 
+ * Accepts: [y, x] - coordinates of matrix where "null" was replaced with the
+ *   current player in the current turn.
+ *   y - row number of the matrix
+ *   x - value number of the matrix
+ */
+function placeHtmlPiece(coordinates) {
+  const [y, x] = coordinates;
+  console.log("y: ", y, "x: ", x);
+  //create a piece, using current player's color,
+  //add the piece to the corresponding board cell via id
+  const $piece = $("<div>")
+    .addClass("piece")
+    .css("background-color", `${currentGame.currPlayer.color}`)
+    .appendTo(`#b-${y}${x}`);
 }
 
 /** A function that handles UI for ending the game. 
@@ -91,11 +119,28 @@ function handleTopRowClick(evt) {
  * If there is a winner, it will announce the winner.
  * If there is no winner, it will announce a tie.
 */
-function endGame(winner) {
+function endGame() {
+  console.log("endGame");
+  console.log("endGame winner: ", currentGame.winner);
   //make div with end game message and restart button
-  //if the winner is not undefined, it will list the winner's color and name.
-  //if undefined, it will announce a tie
+  const $gameOverMsg = $("<div>")
+    .text("Game over!")
+    .appendTo($body);
+  const $winnerMsg = $("<div>")
+    .appendTo($gameOverMsg);
+  const $replayBtn = $("<button>")
+    .text("Play again?")
+    .appendTo($gameOverMsg);
 
+  //if the winner is not null, it will list the winner's color and name.
+  if (currentGame.winner !== null) {
+    $winnerMsg
+      .text(`The winner is ${currentGame.winner.name}!`)
+  //if null, it will announce a tie
+  } else (
+    $winnerMsg
+      .text("It's a tie!")
+  )
   //bonus, use Giphy API to generate a random victory gif?
 }
 
