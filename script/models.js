@@ -48,8 +48,15 @@ class Game {
       ];
    */
   makeBoard() {
-    //
-
+    const matrix = [];
+    for (let row = 0; row < this.numRows; row++) {
+      const row = [];
+      for (let col = 0; col < this.numCols; col++) {
+        row.push(null);
+      }
+      matrix.push(row);
+    }
+    return matrix;
   }
 
   /** This function gets (currently only 2) new Player instances 
