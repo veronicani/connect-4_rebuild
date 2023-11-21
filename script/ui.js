@@ -44,8 +44,9 @@ function endGame(winner) {
 }
 
 
-/** A function that handles the start of the game. */
-function startGame() {
+/** A function that handles the start of the game upon player form submission. */
+function startGame(evt) {
+  evt.preventDefault();
   const game = new Game();
   makeHtmlBoard(game);
 }
