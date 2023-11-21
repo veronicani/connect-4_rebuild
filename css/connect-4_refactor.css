@@ -26,3 +26,24 @@ body {
 /* || Header */
 
 /* || Main */
+#gameBoard {
+  border-collapse: separate;
+}
+
+.top-cell, 
+.body-cell {
+  width: 50px;
+  height: 50px;
+}
+
+.top-cell {
+  border: 1px dotted gray;
+}
+
+.top-cell:hover {
+  background-color: yellow;
+}
+
+.body-cell {
+  border: 1px solid black;
+}
