@@ -1,7 +1,14 @@
 "use strict";
 
+// global let game to hold current Game instance;
+let currentGame; 
+
 // Find all DOM elements
 const $playerForm = $("#player-form");
+const $player1Input = $("#player-1");
+const $player2Input = $("#player-2");
+
+
 const $startBtn = $("#start-button");
 const $gameBoard = $("#game-board");
 const $topRow = $(".top-cell");
@@ -47,8 +54,8 @@ function endGame(winner) {
 /** A function that handles the start of the game upon player form submission. */
 function startGame(evt) {
   evt.preventDefault();
-  const game = new Game();
-  makeHtmlBoard(game);
+  currentGame = new Game();
+  makeHtmlBoard(currentGame);
 }
 
 $playerForm.on("submit", startGame);
