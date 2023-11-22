@@ -13,6 +13,10 @@ const $startBtn = $("#start-button");
 
 const $body = $("body");
 const $gameBoard = $("#gameBoard");
+const $gameOverWindow = $("#gameOverWindow");
+const $gameOverResult = $("#gameOverResult");
+const $replayBtn = $("#replayButton");
+
 
 
 /** A function that creates an HTML table for the current Game instance.
@@ -97,29 +101,29 @@ function placeHtmlPiece(coordinates) {
 function endGame() {
   console.log("endGame");
   console.log("endGame winner: ", currentGame.winner);
-  const $gameOverWindow = $("<div>")
-    .attr("id", "gameOverWindow")
-    .appendTo($body);
-  const $gameOverMsg = $("<p>")
-    .text("Game Over!")
-    .appendTo($gameOverWindow);
+  // const $gameOverWindow = $("<div>")
+  //   .attr("id", "gameOverWindow")
+  //   .appendTo($body);
+  // const $gameOverMsg = $("<p>")
+  //   .text("Game Over!")
+  //   .appendTo($gameOverWindow);
+  //$gameOverResult
+  $gameOverResult.empty();
+  $gameOverWindow.show();
   const $winnerMsg = $("<p>")
-    .appendTo($gameOverWindow);
-  const $replayBtn = $("<button>")
-    .addClass("btn")
-    .text("Play again?")
-    .appendTo($gameOverMsg)
-    .on("click", handleRestart)
+    .appendTo($gameOverResult);
 
   //if the winner is not null, it will list the winner's color and name.
   if (currentGame.winner !== null) {
     $winnerMsg
-      .text(`The winner is ${currentGame.winner.name}!`)
+      .text(`${currentGame.winner.name} wins!`);
     //if null, it will announce a tie
-  } else (
+  } else {
     $winnerMsg
-      .text("It's a tie!")
-  )
+      .text("It's a tie!");
+  }
+
+  $replayBtn.on("click", handleRestart);
   //bonus, use Giphy API to generate a random victory gif?
 }
 
@@ -136,14 +140,16 @@ function startGame(evt) {
 }
 
 /** A function that handles restarting the game upon game over. 
- * It will clear the current game and game over message.
+ * It will clear the current game and hide the game over message.
  * It will change the start button to say "Start"
 */
 function handleRestart(evt) {
-  $("#gameOverWindow").remove();
+  $gameOverWindow.hide();
   $gameBoard.empty();
   $startBtn.text("Start");
 }
+
+$gameOverWindow.hide();
 
 $playerForm.on("submit", startGame);
 $gameBoard.on("click", ".top-cell", handleTopRowClick);
