@@ -1,6 +1,7 @@
 "use strict";
 
-/** Game class: provides functionality for creating a game instance
+/******************************************************************************
+ * Game class: provides functionality for creating a game instance
  *    and handling non-UI game logic.
  *
  *  Game will have:
@@ -188,7 +189,8 @@ class Game {
   }
 }
 
-/** Game class: provides functionality for creating a player instance
+/******************************************************************************
+ * Player class: provides functionality for creating a player instance
  *
  *  Player will have:
  *  - name: name of the player
@@ -207,5 +209,6 @@ class Player {
     return new Player(name, color);
   }
 }
+
 
 

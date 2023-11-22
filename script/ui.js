@@ -17,9 +17,8 @@ const $gameOverWindow = $("#gameOverWindow");
 const $gameOverResult = $("#gameOverResult");
 const $replayBtn = $("#replayButton");
 
-
-
-/** A function that creates an HTML table for the current Game instance.
+/******************************************************************************
+ * A function that creates an HTML table for the current Game instance.
  * Creates a top row for the game board where players can click to drop pieces.
  * 
  * - Table head row: Additional row containing cells that player can click on.
@@ -117,12 +116,12 @@ function endGame() {
   if (currentGame.winner !== null) {
     $winnerMsg
       .text(`${currentGame.winner.name} wins!`);
-    const $gif = $("<div>")
-      .addClass(".game-over_gif");
+    //TODO: add API call to make winner gif
     //if null, it will announce a tie
   } else {
     $winnerMsg
       .text("It's a tie!");
+    //TODO: add API call to make tie gif
   }
 
   $replayBtn.on("click", handleRestart);
