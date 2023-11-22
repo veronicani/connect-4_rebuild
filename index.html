@@ -44,21 +44,28 @@
         </form>
     </header>
   </div>
-  <div class="container">
+  <div class="container position-relative">
     <div class="row">
-      <table id="gameBoard" class="col-12 align-self-center">
-      </table>
+      <div class="col-12 align-self-center">
+        <table id="gameBoard" class="">
+        </table>
+      </div>
+    </div>
+    <div class="row position-absolute top-50 start-50 translate-middle w-75">
+      <div class="col align-self-center">
+        <div id="gameOverWindow" class="popup">
+          <h3>Game Over!</h3>
+          <div id="gameOverResult" class="popup_inner">
+            <p>Testing wins!</p>
+            <div id="gameOverGif"></div>
+          </div>
+          <button id="replayButton" class="btn">Play again?</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="gameOverWindow" class="popup">
-    <h3>Game Over!</h3>
-    <div id="gameOverResult" class="popup_inner">
-      <!-- <p>The winner is:</p>
-      <span>Testing!</span> -->
-    </div>
-    <button id="replayButton" class="btn">Play again?</button>
-  </div>
+
 
   <!-- Library JS and my JS -->
   <script src="https://unpkg.com/jquery"></script>

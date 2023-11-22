@@ -117,6 +117,8 @@ function endGame() {
   if (currentGame.winner !== null) {
     $winnerMsg
       .text(`${currentGame.winner.name} wins!`);
+    const $gif = $("<div>")
+      .addClass(".game-over_gif");
     //if null, it will announce a tie
   } else {
     $winnerMsg
@@ -149,7 +151,7 @@ function handleRestart(evt) {
   $startBtn.text("Start");
 }
 
-$gameOverWindow.hide();
+// $gameOverWindow.hide();
 
 $playerForm.on("submit", startGame);
 $gameBoard.on("click", ".top-cell", handleTopRowClick);
