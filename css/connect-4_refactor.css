@@ -1,9 +1,10 @@
 /* || General Styles */
 :root {
-  --clr-background: #FFFFFF;
-  --clr-primary: #FFFFFF;
-  --clr-font: rgb(0 0 0);
-  --clr-font-lt: rgb(0 0 0 / .5) ; /* with alpha*/
+  /* TODO: play with bootstrap colors */
+  --clr-background: #6abedf;
+  --clr-primary: #3266c5;
+  --clr-font: rgb(255, 255, 255);
+  --clr-font-lt: rgba(254, 254, 254, 0.5); /* with alpha*/
   
   --font-size: 16px;
   --border-radius: 0.2em;
@@ -27,23 +28,25 @@ body {
 
 /* || Player Form */
 .btn {
-  background-color: aqua;
+  color: var(--clr-font); 
+  background-color: var(--clr-primary);
 }
 
 .btn:hover {
-  background-color: blue;
+  background-color: var(--clr-primary);
 }
 
 /* || Gameboard */
 #gameBoard {
   border-collapse: separate;
+  aspect-ratio: 1/1;
 }
 
 .top-cell, 
 .body-cell {
   position: relative;
-  width: 50px;
-  height: 50px;
+  height: 70px;
+  background-color: aliceblue;
 }
 
 .top-cell {
@@ -63,7 +66,22 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
+  width: 80%;
+  height: 80%;
   border-radius: 100%;
+}
+
+/* || GameOver */
+#gameOverMsg {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; 
+  background-color: antiquewhite;
+  border: 2px solid var(--clr-primary);
+
 }

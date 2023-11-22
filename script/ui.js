@@ -97,13 +97,14 @@ function placeHtmlPiece(coordinates) {
 function endGame() {
   console.log("endGame");
   console.log("endGame winner: ", currentGame.winner);
-  //make div with end game message and restart button
-  const $gameOverMsg = $("<div>")
-    .attr("id", "gameOverMsg")
-    .text("Game over!")
+  const $gameOverWindow = $("<div>")
+    .attr("id", "gameOverWindow")
     .appendTo($body);
-  const $winnerMsg = $("<div>")
-    .appendTo($gameOverMsg);
+  const $gameOverMsg = $("<p>")
+    .text("Game Over!")
+    .appendTo($gameOverWindow);
+  const $winnerMsg = $("<p>")
+    .appendTo($gameOverWindow);
   const $replayBtn = $("<button>")
     .addClass("btn")
     .text("Play again?")
@@ -139,7 +140,7 @@ function startGame(evt) {
  * It will change the start button to say "Start"
 */
 function handleRestart(evt) {
-  $("#gameOverMsg").remove();
+  $("#gameOverWindow").remove();
   $gameBoard.empty();
   $startBtn.text("Start");
 }
