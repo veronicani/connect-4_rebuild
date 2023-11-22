@@ -12,20 +12,28 @@
         
 </head>
 <body>
-  <form action="" id="player-form">
-    <div>
-      <label for="player-1">Player 1</label>
-      <input id="player-1" type="text">
+  <form action="" id="player-form" class="container">
+    <div class="row">
+      <div class="col-6">
+        <label for="player-1-name">Player 1</label>
+        <input id="player-1-name" type="text">
+        <label for="player-1">Player 1 Color</label>
+        <input id="player-1-color" type="color">
+      </div>
+      <div class="col-6">
+        <label for="player-2-name">Player 2</label>
+        <input id="player-2-name" type="text">
+        <label for="player-2">Player 2</label>
+        <input id="player-2-color" type="color">
+      </div>
+      <button class="btn" id="start-button" type="submit" value="submit">Start!</button>
     </div>
-    <div>
-      <label for="player-2">Player 2</label>
-      <input id="player-2" type="text">
-    </div>
-    <button class="btn" id="start-button" type="submit" value="submit">Start!</button>
   </form>
-  
-  <table id="gameBoard">
-  </table>
+
+  <section class="container">
+    <table id="gameBoard">
+    </table>
+  </section>
 
   <!-- Library JS and my JS -->
   <script src="https://unpkg.com/jquery"></script>

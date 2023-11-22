@@ -25,7 +25,16 @@ body {
 
 /* || Header */
 
-/* || Main */
+/* || Player Form */
+.btn {
+  background-color: aqua;
+}
+
+.btn:hover {
+  background-color: blue;
+}
+
+/* || Gameboard */
 #gameBoard {
   border-collapse: separate;
 }

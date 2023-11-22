@@ -5,8 +5,10 @@ let currentGame;
 
 // Find all DOM elements
 const $playerForm = $("#player-form");
-const $player1Input = $("#player-1");
-const $player2Input = $("#player-2");
+const $player1NameInput = $("#player-1-name");
+const $player1ColorInput = $("#player-1-color");
+const $player2NameInput = $("#player-2-name");
+const $player2ColorInput = $("#player-2-color");
 const $startBtn = $("#start-button");
 
 const $body = $("body");

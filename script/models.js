@@ -58,7 +58,8 @@ class Game {
     }
     return matrix;
   }
-
+  //TODO: make accept multiple players -- no need to assign to variables
+  //just use a for loop
   /** This function gets (currently only 2) new Player instances 
    *   and assigns them to variables.
    * 
@@ -67,8 +68,8 @@ class Game {
    * Returns: An array of Player instances
    */
   getPlayers() {
-    const p1 = Player.makePlayer("p1", $player1Input.val());
-    const p2 = Player.makePlayer("p2", $player2Input.val());
+    const p1 = Player.makePlayer($player1NameInput.val(), $player1ColorInput.val());
+    const p2 = Player.makePlayer($player2NameInput.val(), $player2ColorInput.val());
     console.log('p1: ', p1, 'p2: ', p2);
     return [p1, p2];
   }
