@@ -119,13 +119,13 @@ class Game {
       });
 
       if (illegalMove) return false;
-      
+
       //if all legal coordinates match current player, return true
       const winningCombo = coordinates.every(([y, x]) => {
         return this.board[y][x] === this.currPlayer.name;
       });
       console.log(`winningCombo: `, winningCombo);
-      
+
       if (winningCombo) return true;
     }
 
@@ -154,23 +154,41 @@ class Game {
     return false;
   }
 
-  // /** A function that triggers a sequence of events based on where the 
-  //  *   current player chooses to place their piece.
-  //  * After the player has placed a piece, it will check if the player has won.
-  //  *   If so, it will end the game.
-  //  * If there are still available spots on the board, it will switch 
-  //  *   the current player.
-  // */
-  // executeMove(x) {
-  //   //if findSpotInCol => false
-  //   //return
-  //   //check if there is a winner
-  //   //if yes, end the game with the winner -- delay this by 1 sec so HTML can update
-  //     //return 
-  //   //check if there are still board spots avail
-  //     //if so, switch current player
-  //     //else, end the game w/o a winner -- delay this by 1 sec so HTML can update
-  // }
+  /** A function that triggers a sequence of events based on where the 
+   *   current player chooses to place their piece.
+   * After the player has placed a piece, it will check if the player has won.
+   *   If so, it will end the game.
+   * If there are still available spots on the board, it will switch 
+   *   the current player.
+  */
+  executeMove(x) {
+
+    const updatedCoords = currentGame.findSpotInCol(x);
+    if (updatedCoords === undefined) {
+      return;
+    }
+
+    placeHtmlPiece(updatedCoords);
+    
+    const winner = currentGame.checkForWin();
+    //when the top row doesn't have null, board is full
+    const boardIsFull = !currentGame.board[0].includes(null);
+    console.log("boardIsFull: ", boardIsFull);
+    
+    if (winner) {
+      console.log('winner!');
+      setTimeout(endGame, 1000);
+    } else if (boardIsFull) {
+      console.log('board is full!');
+      setTimeout(endGame, 1000);
+    }
+
+    currentGame.currPlayer = currentGame.currPlayer === currentGame.players[0]
+      ? currentGame.players[1]
+      : currentGame.players[0];
+
+    console.log('switched current Player: ', currentGame.currPlayer);
+  }
 }
 
 /**TODO: describe Player class */

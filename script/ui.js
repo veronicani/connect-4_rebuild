@@ -1,6 +1,6 @@
 "use strict";
 
-// global let game to hold current Game instance;
+// global variable to hold current Game instance;
 let currentGame;
 
 // Find all DOM elements
@@ -11,7 +11,7 @@ const $startBtn = $("#start-button");
 
 const $body = $("body");
 const $gameBoard = $("#gameBoard");
-const $topRow = $(".top-cell");
+
 
 /** A function that creates an HTML table for the current Game instance.
  * Creates a top row for the game board where players can click to drop pieces.
@@ -32,7 +32,7 @@ function makeHtmlBoard(game) {
   const $headRow = $("<tr>")
     .appendTo($thead);
 
-  for (let col = 0; col < currentGame.numCols; col++) {
+  for (let col = 0; col < game.numCols; col++) {
     const $topCell = $("<th>")
       .addClass("top-cell")
       .attr("id", `t-${col}`)
@@ -42,10 +42,10 @@ function makeHtmlBoard(game) {
   const $tableBody = $("<tbody>")
     .appendTo($gameBoard);
 
-  for (let row = 0; row < currentGame.numRows; row++) {
+  for (let row = 0; row < game.numRows; row++) {
     const $bodyRow = $("<tr>")
       .appendTo($tableBody);
-    for (let col = 0; col <currentGame.numCols; col++) {
+    for (let col = 0; col <game.numCols; col++) {
       const $bodyCell = $("<td>")
         .addClass("body-cell")
         .attr("id", `b-${row}${col}`)
@@ -60,40 +60,13 @@ function makeHtmlBoard(game) {
  * 
  * Accepts: the event of clicking on a cell in the top row of the HTML board.
  */
-
-//TODO: move functions to be in Game class?
 function handleTopRowClick(evt) {
   console.log("starting handleTopRowClick");
-
   console.log("evt target id: ", evt.target.id);
   
   const clickedColNum = Number(evt.target.id.replace("t-", ""));
 
-  const updatedCoords = currentGame.findSpotInCol(clickedColNum);
-  if (updatedCoords === undefined) {
-    return;
-  }
-
-  placeHtmlPiece(updatedCoords);
-  
-  const winner = currentGame.checkForWin();
-
-  //when the top row doesn't have null, board is full
-  const boardIsFull = !currentGame.board[0].includes(null);
-  console.log("boardIsFull: ", boardIsFull);
-  if (winner) {
-    console.log('winner!');
-    setTimeout(endGame, 1000);
-  } else if (boardIsFull){
-    console.log('board is full!'); 
-    setTimeout(endGame, 1000);
-  }
-
-  currentGame.currPlayer = currentGame.currPlayer === currentGame.players[0] 
-    ? currentGame.players[1] 
-    : currentGame.players[0];
-
-  console.log('switched current Player: ', currentGame.currPlayer);
+  currentGame.executeMove(clickedColNum);
 }
 
 /** This function places the current player's piece in the HTML board.
@@ -124,13 +97,16 @@ function endGame() {
   console.log("endGame winner: ", currentGame.winner);
   //make div with end game message and restart button
   const $gameOverMsg = $("<div>")
+    .attr("id", "gameOverMsg")
     .text("Game over!")
     .appendTo($body);
   const $winnerMsg = $("<div>")
     .appendTo($gameOverMsg);
   const $replayBtn = $("<button>")
+    .addClass("btn")
     .text("Play again?")
-    .appendTo($gameOverMsg);
+    .appendTo($gameOverMsg)
+    .on("click", handleRestart)
 
   //if the winner is not null, it will list the winner's color and name.
   if (currentGame.winner !== null) {
@@ -145,11 +121,26 @@ function endGame() {
 }
 
 
-/** A function that handles the start of the game upon player form submission. */
+/** A function that handles the start of the game upon player form submission.
+ * Upon clicking start, the start button will change to say "Restart"
+*/
 function startGame(evt) {
   evt.preventDefault();
+  
+  $startBtn.text("Restart");
+  
   currentGame = new Game();
   makeHtmlBoard(currentGame);
+}
+
+/** A function that handles restarting the game upon game over. 
+ * It will clear the current game and game over message.
+ * It will change the start button to say "Start"
+*/
+function handleRestart(evt) {
+  $("#gameOverMsg").remove();
+  $gameBoard.empty();
+  $startBtn.text("Start");
 }
 
 $playerForm.on("submit", startGame);
