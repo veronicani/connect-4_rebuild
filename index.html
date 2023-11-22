@@ -17,40 +17,46 @@
 <body>
   <div class="container">
     <header>
-      <h1>Connect 4</h1>
+      <div class="row justify-content-center">
+        <h1>Connect 4</h1>
+      </div>
       <div class="row align-items-center">
         <form action="" id="player-form" class="container">
           <div class="row align-items-center">
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <label for="player-1-name">Player 1</label>
               <input id="player-1-name" type="text" value="Player 1">
               <label for="player-1">Player 1 Color</label>
               <input id="player-1-color" type="color" value="#ff0000">
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <label for="player-2-name">Player 2</label>
               <input id="player-2-name" type="text" value="Player 2">
               <label for="player-2">Player 2 Color</label>
               <input id="player-2-color" type="color" value="#0000FF">
             </div>
           </div>
-          <div class="row align-items-center">
-            <button class="btn" id="start-button" type="submit" value="submit">Start!</button>
+          <div class="row justify-content-center">
+            <div class="col">
+              <button class="btn" id="start-button" type="submit" value="submit">Start!</button>
+            </div>
           </div>
         </form>
     </header>
   </div>
   <div class="container">
-    <div class="row align-items-center">
-      <table id="gameBoard" class="col-12">
+    <div class="row">
+      <table id="gameBoard" class="col-12 align-self-center">
       </table>
     </div>
   </div>
 
-
-  <div id="gameOverMsg">
-    <p>Game Over!</p>
-    <p>The winner is Testing!</p>
+  <div id="gameOverWindow" class="popup">
+    <h3>Game Over!</h3>
+    <div class="popup_inner">
+      <p>The winner is:</p>
+      <span>Testing!</span>
+    </div>
     <button class="btn">Play again?</button>
   </div>
 

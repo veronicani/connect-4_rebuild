@@ -10,7 +10,8 @@
 
 
   --clr-font: rgb(255, 255, 255);
-  --clr-font-dark: rgb(0, 0, 0);
+  --clr-font-dark: rgba(4, 0, 202, 1);
+  --clr-font-blk: rgb(0, 0, 0);
   
   --font-size: 16px;
   --border-radius: 0.2em;
@@ -21,7 +22,7 @@
 }
 
 body {
-  font-family:'', sans-serif;
+  font-family: Helvetica, sans-serif;
   font-size: var(--font-size);
   color: var(--clr-font); 
   background-color: var(--clr-primary);
@@ -30,7 +31,8 @@ body {
 /* || Typography */
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: 'Lilita One', sans-serif;
   text-align: center;
 }
@@ -40,24 +42,33 @@ h1 {
   text-transform: uppercase;
 }
 
-h2 {
-
+h3 {
+  font-size: 2rem;
 }
 
 /* || Utilities -- for styling choices you want to apply to a lot of elements << ref MDN*/
 
 /* || Header */
 header {
-  
+  padding: 1rem;
 }
 
 /* || Player Form */
 form {
+  font-family: Helvetica, sans-serif;
   background-color: var(--clr-primary-lt);
 }
 
+form p,
+form h4 {
+  color: var(--clr-font-dark);
+}
+
 .btn {
+  display: block;
+  margin-inline: auto;
   font-family: 'Lilita One', sans-serif;
+  text-transform: uppercase;
   color: var(--clr-font); 
   background-color: var(--clr-secondary);
 }
@@ -76,7 +87,7 @@ form {
 .body-cell {
   position: relative;
   height: 70px;
-  background-color: aliceblue;
+  background-color: var(--clr-wht-alpha);
 }
 
 .top-cell {
@@ -102,16 +113,35 @@ form {
 }
 
 /* || GameOver */
-#gameOverMsg {
+.popup {
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 300px;
+  width: 400px;
+  padding-block: 20px; 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px; 
-  background-color: antiquewhite;
-  border: 2px solid var(--clr-primary);
+  justify-content: center;
+  background-color: var(--clr-primary);
+  border: 2px solid var(--clr-secondary);
 
+}
+
+.popup_inner {
+  width: 100%;
+  margin-block: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--clr-font-dark);
+  text-align: center;
+  background-color: var(--clr-wht-alpha);
+}
+
+.popup_inner span {
+  font-family: 'Lilita One', sans-serif;
+  font-size: 2rem;
 }
