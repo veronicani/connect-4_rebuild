@@ -74,11 +74,13 @@ form h4 {
 }
 
 .btn:hover {
-  background-color: var(--clr-primary);
+  color: var(--clr-font-dark);
+  background-color: var(--clr-highlight);
 }
 
 /* || Gameboard */
 #gameBoard {
+  width: 100%;
   border-collapse: separate;
   aspect-ratio: 1/1;
 }
@@ -114,19 +116,20 @@ form h4 {
 
 /* || GameOver */
 .popup {
-  position: absolute;
+  /* gave absolute positioning via bootstrap */
+  /* position: absolute;
   top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  height: 300px;
-  width: 400px;
+  transform: translate(-50%, -50%); */
+  /* height: 300px; */
+  /* width: 400px; */
   padding-block: 20px; 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   background-color: var(--clr-primary);
   border: 2px solid var(--clr-secondary);
-
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.547);
 }
 
 .popup_inner {
@@ -135,7 +138,8 @@ form h4 {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
   background-color: var(--clr-wht-alpha);
 }
 
@@ -144,4 +148,10 @@ form h4 {
   font-size: 2rem;
   color: var(--clr-font-dark);
   text-align: center;
+}
+
+#gameOverGif {
+  width: 100px;
+  height: 150px;
+  border: 2px solid black;
 }
