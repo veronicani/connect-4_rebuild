@@ -45,7 +45,7 @@ function makeHtmlBoard(game) {
   for (let row = 0; row < game.numRows; row++) {
     const $bodyRow = $("<tr>")
       .appendTo($tableBody);
-    for (let col = 0; col <game.numCols; col++) {
+    for (let col = 0; col < game.numCols; col++) {
       const $bodyCell = $("<td>")
         .addClass("body-cell")
         .attr("id", `b-${row}${col}`)
@@ -63,7 +63,7 @@ function makeHtmlBoard(game) {
 function handleTopRowClick(evt) {
   console.log("starting handleTopRowClick");
   console.log("evt target id: ", evt.target.id);
-  
+
   const clickedColNum = Number(evt.target.id.replace("t-", ""));
 
   currentGame.executeMove(clickedColNum);
@@ -112,7 +112,7 @@ function endGame() {
   if (currentGame.winner !== null) {
     $winnerMsg
       .text(`The winner is ${currentGame.winner.name}!`)
-  //if null, it will announce a tie
+    //if null, it will announce a tie
   } else (
     $winnerMsg
       .text("It's a tie!")
@@ -120,15 +120,14 @@ function endGame() {
   //bonus, use Giphy API to generate a random victory gif?
 }
 
-
 /** A function that handles the start of the game upon player form submission.
  * Upon clicking start, the start button will change to say "Restart"
 */
 function startGame(evt) {
   evt.preventDefault();
-  
+
   $startBtn.text("Restart");
-  
+
   currentGame = new Game();
   makeHtmlBoard(currentGame);
 }

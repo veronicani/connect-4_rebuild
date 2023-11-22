@@ -1,5 +1,5 @@
-
 "use strict";
+
 /** Game class: provides functionality for creating a game instance
  *    and handling non-UI game logic.
  *
@@ -64,7 +64,7 @@ class Game {
    * 
    * Accepts: number of players (integer)
    * 
-   * Returns: An array of player variables, each assigned to a Player instance
+   * Returns: An array of Player instances
    */
   getPlayers() {
     const p1 = Player.makePlayer("p1", $player1Input.val());
@@ -74,15 +74,15 @@ class Game {
   }
 
   /** A function that finds the next available spot for the column
-   * in the board the current player clicks to drop their piece in, 
-   * and updates the board with the current player's piece. 
+   *   in the board the current player clicks to drop their piece in, 
+   *   and updates the board with the current player's piece. 
    * 
    * Input: x - an integer, representing the chosen column number.
    * 
    * Returns: 
    *   - [y, x] - coordinates of the newly played piece if there is an available spot.
    *   - false, if all spots of the column are filled, and player has not placed piece.
-  */
+   */
   findSpotInCol(x) {
     console.log("starting findSpotInCol");
     if (this.winner !== null) return;
@@ -104,12 +104,12 @@ class Game {
 
   /** A function that checks if there is a winning move made by the current player.
    * If there is a winning move, it will update the Game instance's .winner
-   * with the current player.
+   *   with the current player.
    * 
    * Returns:
    *  - true: the current player has made a winning move
    *  - false: the current player has not made a winning move
-  */
+   */
   checkForWin() {
 
     const _win = (coordinates) => {
@@ -124,7 +124,7 @@ class Game {
       const winningCombo = coordinates.every(([y, x]) => {
         return this.board[y][x] === this.currPlayer.name;
       });
-      console.log(`winningCombo: `, winningCombo);
+      // console.log(`winningCombo: `, winningCombo);
 
       if (winningCombo) return true;
     }
@@ -135,13 +135,9 @@ class Game {
       for (let x = 0; x < this.numCols; x++) {
         //do a sweep of the board, starting from current y, and current x
         //assign LR, TP, DR, DL coords
-        //left to right: [[y][x], [y][x + 1], [y][x + 2], [y][x + 3]]
         const LR = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-        //top to bottom: board[y][x], board[y+1][x], board[y+2][x], board[y+3][x]
         const TB = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-        //diagonal right: board[y][x], board[y+1][x+1], board[y+2][x+2], board[y+3][x+3]
         const DR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-        //diagonal left: board[y][x], board[y-1][x+1], board[y-2][x+2], board[y-3][x+3]
         const DL = [[y, x], [y - 1, x + 1], [y - 2, x + 2], [y - 3, x + 3]];
         //if either (LR || TP || DL || DR) coords match the current player
         if (_win(LR) || _win(TB) || _win(DR) || _win(DL)) {
@@ -169,12 +165,12 @@ class Game {
     }
 
     placeHtmlPiece(updatedCoords);
-    
+
     const winner = currentGame.checkForWin();
     //when the top row doesn't have null, board is full
     const boardIsFull = !currentGame.board[0].includes(null);
     console.log("boardIsFull: ", boardIsFull);
-    
+
     if (winner) {
       console.log('winner!');
       setTimeout(endGame, 1000);
@@ -191,14 +187,19 @@ class Game {
   }
 }
 
-/**TODO: describe Player class */
+/** Game class: provides functionality for creating a player instance
+ *
+ *  Player will have:
+ *  - name: name of the player
+ *  - color: color of the player's piece
+ */
 class Player {
   constructor(name, color) {
     this.name = name;
     this.color = color;
   }
 
-  /** Creates a new Player instance*/
+  /** Creates a new Player instance */
   static makePlayer(name, color) {
     console.log('player name: ', name);
     console.log('player color: ', color);
