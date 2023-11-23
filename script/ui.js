@@ -15,6 +15,7 @@ const $body = $("body");
 const $gameBoard = $("#gameBoard");
 const $gameOverWindow = $("#gameOverWindow");
 const $gameOverResult = $("#gameOverResult");
+// const $gameOverGifArea = $("#gameOverGif");
 const $replayBtn = $("#replayButton");
 
 /******************************************************************************
@@ -97,7 +98,7 @@ function placeHtmlPiece(coordinates) {
  * If there is a winner, it will announce the winner.
  * If there is no winner, it will announce a tie.
 */
-function endGame() {
+async function endGame() {
   console.log("endGame");
   console.log("endGame winner: ", currentGame.winner);
   // const $gameOverWindow = $("<div>")
@@ -116,7 +117,13 @@ function endGame() {
   if (currentGame.winner !== null) {
     $winnerMsg
       .text(`${currentGame.winner.name} wins!`);
-    //TODO: add API call to make winner gif
+    const $winGifLink = await Gif.getGif("win");
+    console.log("$winGifLink: ", $winGifLink, "type: ", typeof $winGifLink);
+    const $winGif = $("<img>")
+      .attr("id", "gameOverGif")
+      .attr("src", $winGifLink)
+      .appendTo($gameOverResult);
+    console.log("$winGif: ", $winGif);
     //if null, it will announce a tie
   } else {
     $winnerMsg

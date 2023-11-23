@@ -1,6 +1,6 @@
 "use strict";
 
-const BASE_GIPHY_URL = 'api.giphy.com/v1';
+const BASE_GIPHY_URL = 'http://api.giphy.com/v1';
 const GIPHY_API_KEY = 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym';
 /******************************************************************************
  * Game class: provides functionality for creating a game instance
@@ -225,8 +225,7 @@ class Player {
 
 class Gif {
   constructor(tag) {
-    this.responseData = this.fetchGifData(tag);
-    this.getLinkFromGifData(this.responseData);
+    this.tag = tag;
   }
 
   /** Makes a fetch request to Giphy API for a random Gif based on the input tag.
@@ -234,19 +233,25 @@ class Gif {
    * Input: this is the search tag that the result gif will relate to.
    *   either 'win' or 'tie game' 
    * 
-   * Returns: response data object from Giphy API.
+   * Returns: a response data object from Giphy API.
   */
-  async fetchGifData(keyword) {
+  static async fetchGifData(keyword) {
     console.log('starting fetchGifData');
     const giphySearchParams = new URLSearchParams(
       {
         tag: keyword,
-        api_key: GIPHY_API_KEY
+        api_key: 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym'
       });
+    // const params = new URLSearchParams(
+    // {
+    //   q:input,
+    //   api_key: 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym' //TODO:global const
+    // });
 
-    const response = await fetch
-      (`${BASE_GIPHY_URL}/gifs/random${giphySearchParams}`);
+    const response = await fetch ('http://api.giphy.com/v1/gifs/random/?tag=win&api_key=MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym')
+      // (`${BASE_GIPHY_URL}/gifs/random/${giphySearchParams}`);
     
+    console.log("reponse data:", response);
     return await response.json();
   }
 
@@ -254,12 +259,27 @@ class Gif {
    * 
    * Input: response data object
    * 
-   * Returns: a string of the link to the source gif.
+   * Returns: a string of the link to the gif.
    */
-  getLinkFromGifData(responseObj) {
+  static getLinkFromGifData(responseObj) {
     console.log('starting getLinkFromGifData');
+    console.log('responseObj: ', responseObj);
     const link = responseObj.data.images.downsized.url
     console.log('giphy gif link: ', link);
+    return link;
+  }
+
+ /** This function controls other functions to get a random gif link
+  * from Giphy API.
+  * 
+  * Input: keyword - this will be either 'win' or 'tie game'
+  * 
+  * Returns: a string of the gif link to embed into the UI.
+  */
+  static async getGif(keyword) {
+    console.log('starting getGif');
+    const response = await this.fetchGifData(keyword);
+    const link = this.getLinkFromGifData(response);
     return link;
   }
 

@@ -150,8 +150,8 @@ form h4 {
   text-align: center;
 }
 
-#gameOverGif {
-  width: 100px;
-  height: 150px;
+#gameOverGif{
+  width: 50%;
   border: 2px solid black;
 }
+
