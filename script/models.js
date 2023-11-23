@@ -1,5 +1,7 @@
 "use strict";
 
+const BASE_GIPHY_URL = 'api.giphy.com/v1';
+const GIPHY_API_KEY = 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym';
 /******************************************************************************
  * Game class: provides functionality for creating a game instance
  *    and handling non-UI game logic.
@@ -210,5 +212,62 @@ class Player {
   }
 }
 
+/******************************************************************************
+ * Gif class: provides functionality for creating a gif instance to add to the
+ *   Game Over UI.
+ *   
+ *   Makes an AJAX request to the Giphy API and returns a single random GIF.
+ *   
+ *  Gif will have:
+ *  - input
+ *  
+ */
 
+class Gif {
+  constructor(tag) {
+    this.responseData = this.fetchGifData(tag);
+    this.getLinkFromGifData(this.responseData);
+  }
 
+  /** Makes a fetch request to Giphy API for a random Gif based on the input tag.
+   * 
+   * Input: this is the search tag that the result gif will relate to.
+   *   either 'win' or 'tie game' 
+   * 
+   * Returns: response data object from Giphy API.
+  */
+  async fetchGifData(keyword) {
+    console.log('starting fetchGifData');
+    const giphySearchParams = new URLSearchParams(
+      {
+        tag: keyword,
+        api_key: GIPHY_API_KEY
+      });
+
+    const response = await fetch
+      (`${BASE_GIPHY_URL}/gifs/random${giphySearchParams}`);
+    
+    return await response.json();
+  }
+
+  /** Extracts gif link from response data object returned from Giphy API.
+   * 
+   * Input: response data object
+   * 
+   * Returns: a string of the link to the source gif.
+   */
+  getLinkFromGifData(responseObj) {
+    console.log('starting getLinkFromGifData');
+    const link = responseObj.data.images.downsized.url
+    console.log('giphy gif link: ', link);
+    return link;
+  }
+
+  // /** Renders HTML of the gif based on link embed URL */
+  // renderGifHTML(link) {
+  //   console.log('datatypeLink: ', typeof link);
+  //   const $memes = $('#memes');
+  //   //const $embed = $(`<iframe src=${link}>`);
+  //   const $embed = $(`<img src=${link}>`);
+  // }
+}
