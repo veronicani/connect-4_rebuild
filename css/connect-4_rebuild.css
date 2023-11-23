@@ -47,6 +47,9 @@ h3 {
 }
 
 /* || Utilities -- for styling choices you want to apply to a lot of elements << ref MDN*/
+.hidden {
+  display: none;
+}
 
 /* || Header */
 header {
@@ -124,8 +127,9 @@ form h4 {
   /* height: 300px; */
   /* width: 400px; */
   padding-block: 20px; 
-  display: flex;
-  flex-direction: column;
+  /* overrides hidden class, which hides nav on start */
+  /* display: flex;
+  flex-direction: column; */
   /* justify-content: center; */
   background-color: var(--clr-primary);
   border: 2px solid var(--clr-secondary);
@@ -138,7 +142,6 @@ form h4 {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   background-color: var(--clr-wht-alpha);
 }

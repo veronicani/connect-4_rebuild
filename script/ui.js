@@ -101,34 +101,34 @@ function placeHtmlPiece(coordinates) {
 async function endGame() {
   console.log("endGame");
   console.log("endGame winner: ", currentGame.winner);
-  // const $gameOverWindow = $("<div>")
-  //   .attr("id", "gameOverWindow")
-  //   .appendTo($body);
-  // const $gameOverMsg = $("<p>")
-  //   .text("Game Over!")
-  //   .appendTo($gameOverWindow);
-  //$gameOverResult
+
   $gameOverResult.empty();
   $gameOverWindow.show();
   const $winnerMsg = $("<p>")
+    .appendTo($gameOverResult);
+
+  const $gameOverGif = $("<img>")
+    .attr("id", "gameOverGif")
     .appendTo($gameOverResult);
 
   //if the winner is not null, it will list the winner's color and name.
   if (currentGame.winner !== null) {
     $winnerMsg
       .text(`${currentGame.winner.name} wins!`);
-    const $winGifLink = await Gif.getGif("win");
-    console.log("$winGifLink: ", $winGifLink, "type: ", typeof $winGifLink);
-    const $winGif = $("<img>")
-      .attr("id", "gameOverGif")
+
+    const $winGifLink = await Gif.getGifLink("win");
+    // console.log("$winGifLink: ", $winGifLink, "type: ", typeof $winGifLink);
+    $gameOverGif
       .attr("src", $winGifLink)
-      .appendTo($gameOverResult);
-    console.log("$winGif: ", $winGif);
     //if null, it will announce a tie
   } else {
     $winnerMsg
       .text("It's a tie!");
-    //TODO: add API call to make tie gif
+
+    const $tieGifLink = await Gif.getGifLink("tie");
+    $gameOverGif
+      .attr("src", $tieGifLink)
+
   }
 
   $replayBtn.on("click", handleRestart);
@@ -156,8 +156,6 @@ function handleRestart(evt) {
   $gameBoard.empty();
   $startBtn.text("Start");
 }
-
-// $gameOverWindow.hide();
 
 $playerForm.on("submit", startGame);
 $gameBoard.on("click", ".top-cell", handleTopRowClick);

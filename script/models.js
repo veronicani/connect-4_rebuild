@@ -240,17 +240,11 @@ class Gif {
     const giphySearchParams = new URLSearchParams(
       {
         tag: keyword,
-        api_key: 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym'
+        api_key: GIPHY_API_KEY
       });
-    // const params = new URLSearchParams(
-    // {
-    //   q:input,
-    //   api_key: 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym' //TODO:global const
-    // });
 
-    const response = await fetch ('http://api.giphy.com/v1/gifs/random/?tag=win&api_key=MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym')
-      // (`${BASE_GIPHY_URL}/gifs/random/${giphySearchParams}`);
-    
+    const response = await fetch
+      (`${BASE_GIPHY_URL}/gifs/random/?${giphySearchParams}`);
     console.log("reponse data:", response);
     return await response.json();
   }
@@ -269,25 +263,17 @@ class Gif {
     return link;
   }
 
- /** This function controls other functions to get a random gif link
-  * from Giphy API.
-  * 
-  * Input: keyword - this will be either 'win' or 'tie game'
-  * 
-  * Returns: a string of the gif link to embed into the UI.
-  */
-  static async getGif(keyword) {
+  /** This function controls other functions to get a random gif link
+   * from Giphy API.
+   * 
+   * Input: keyword - this will be either 'win' or 'tie game'
+   * 
+   * Returns: a string of the gif link to embed into the UI.
+   */
+  static async getGifLink(keyword) {
     console.log('starting getGif');
     const response = await this.fetchGifData(keyword);
     const link = this.getLinkFromGifData(response);
     return link;
   }
-
-  // /** Renders HTML of the gif based on link embed URL */
-  // renderGifHTML(link) {
-  //   console.log('datatypeLink: ', typeof link);
-  //   const $memes = $('#memes');
-  //   //const $embed = $(`<iframe src=${link}>`);
-  //   const $embed = $(`<img src=${link}>`);
-  // }
 }
