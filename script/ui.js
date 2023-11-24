@@ -4,7 +4,7 @@
 let currentGame;
 
 // global constants
-const PLAYER_MAX = 4; 
+const PLAYER_MAX = 4;
 const ADDITIONAL_PLAYER_COLORS = {
   3: "#ffc800",
   4: "#7acc00"
@@ -172,36 +172,54 @@ let extraPlayerNum = $defaultPlayerNameInputs.length + 1;
 function addPlayerInput(evt) {
   evt.preventDefault();
   console.log('extraPlayerNum: ', extraPlayerNum);
-  if (extraPlayerNum <= PLAYER_MAX) {
-    const $inputArea = $("<div>")
-      .addClass("col-12 col-sm-6")
-      .appendTo($playerInputs);
-    const $playerNameLabel = $("<label>")
-      .attr("for", `player-${extraPlayerNum}-name`)
-      .text(`Player ${extraPlayerNum}`)
-      .appendTo($inputArea);
-    const $playerNameInput = $("<input>")
-      .attr("id", `player-${extraPlayerNum}-name`)
-      .addClass("player-name-input")
-      .attr("type", "text")
-      .val(`Player ${extraPlayerNum}`)
-      .appendTo($inputArea);
-    const $playerColorLabel = $("<label>")
-      .attr("for", `player-${extraPlayerNum}-color`)
-      .text(`Player ${extraPlayerNum} Color`)
-      .appendTo($inputArea);
-    const $playerColorInput = $("<input>")
-      .attr("id", `player-${extraPlayerNum}-color`)
-      .addClass("player-color-input")
-      .attr("type", "color")
-      .val(`${ADDITIONAL_PLAYER_COLORS[extraPlayerNum]}`)
-      .appendTo($inputArea);
-    
-      extraPlayerNum++;
-  }
+  if (extraPlayerNum > PLAYER_MAX) return;
+
+  const $inputArea = $("<div>")
+    .addClass("col-12 col-sm-6")
+    .appendTo($playerInputs);
+
+  const $playerNameLabel = $("<label>")
+    .attr("for", `player-${extraPlayerNum}-name`)
+    .text(`Player ${extraPlayerNum}`)
+    .appendTo($inputArea);
+  const $playerNameInput = $("<input>")
+    .attr("id", `player-${extraPlayerNum}-name`)
+    .addClass("player-name-input")
+    .attr("type", "text")
+    //using val() will not add the value to the html
+    .attr("value", `Player ${extraPlayerNum}`)
+    .appendTo($inputArea);
+
+  const $playerColorLabel = $("<label>")
+    .attr("for", `player-${extraPlayerNum}-color`)
+    .text(`Player ${extraPlayerNum} Color`)
+    .appendTo($inputArea);
+  const $playerColorInput = $("<input>")
+    .attr("id", `player-${extraPlayerNum}-color`)
+    .addClass("player-color-input")
+    .attr("type", "color")
+    .attr("value", `${ADDITIONAL_PLAYER_COLORS[extraPlayerNum]}`)
+    .appendTo($inputArea);
+
+  const $removePlayer = $("<a>")
+    .attr("href", "")
+    .text("Remove")
+    .appendTo($inputArea)
+    .on("click", removePlayerInput);
+
+  extraPlayerNum++;
 
 }
 
+function removePlayerInput(evt) {
+  console.log('removePlayerInput');
+  evt.preventDefault();
+  const $evtTarget = $(evt.target);
+  const $inputArea = $evtTarget.closest(".col-12.col-sm-6")
+    .remove();
+
+  extraPlayerNum--;
+}
 
 
 $playerForm.on("click", "#add-player", addPlayerInput);

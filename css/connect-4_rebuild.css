@@ -51,6 +51,20 @@ h3 {
   display: none;
 }
 
+.btn {
+  display: block;
+  margin-inline: auto;
+  font-family: 'Lilita One', sans-serif;
+  text-transform: uppercase;
+  color: var(--clr-font); 
+  background-color: var(--clr-secondary);
+}
+
+.btn:hover {
+  color: var(--clr-font-dark);
+  background-color: var(--clr-highlight);
+}
+
 /* || Header */
 header {
   padding: 1rem;
@@ -67,18 +81,9 @@ form h4 {
   color: var(--clr-font-dark);
 }
 
-.btn {
-  display: block;
-  margin-inline: auto;
-  font-family: 'Lilita One', sans-serif;
-  text-transform: uppercase;
-  color: var(--clr-font); 
-  background-color: var(--clr-secondary);
-}
-
-.btn:hover {
-  color: var(--clr-font-dark);
-  background-color: var(--clr-highlight);
+form a {
+  color: var(--clr-font);
+  font-style: italic;
 }
 
 /* || Gameboard */
