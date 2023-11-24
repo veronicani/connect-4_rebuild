@@ -3,9 +3,17 @@
 // global variable to hold current Game instance;
 let currentGame;
 
+// global constants
+const PLAYER_MAX = 4; 
+const ADDITIONAL_PLAYER_COLORS = {
+  3: "#ffc800",
+  4: "#7acc00"
+}
+
 // Find all DOM elements
 const $playerForm = $("#player-form");
 const $playerInputs = $("#player-inputs");
+const $defaultPlayerNameInputs = $(".player-name-input");
 
 const $addPlayer = $("#add-player");
 const $startBtn = $("#start-button");
@@ -158,44 +166,38 @@ function startGame(evt) {
 /** A function that handles adding a new player input on the player form
  * when the '+ Add player' link is clicked.
  */
-let playerNum = 3;
-const playerColors = {
-  1: "#ff0000",
-  2: "#0000ff",
-  3: "#00ff00",
-  4: "#ffff00"
-}
+
+let extraPlayerNum = $defaultPlayerNameInputs.length + 1;
 
 function addPlayerInput(evt) {
   evt.preventDefault();
-
-  if (playerNum <= 4) {
+  console.log('extraPlayerNum: ', extraPlayerNum);
+  if (extraPlayerNum <= PLAYER_MAX) {
     const $inputArea = $("<div>")
       .addClass("col-12 col-sm-6")
       .appendTo($playerInputs);
     const $playerNameLabel = $("<label>")
-      .attr("for", `player-${playerNum}-name`)
-      .text(`Player ${playerNum}`)
+      .attr("for", `player-${extraPlayerNum}-name`)
+      .text(`Player ${extraPlayerNum}`)
       .appendTo($inputArea);
     const $playerNameInput = $("<input>")
-      .attr("id", `player-${playerNum}-name`)
+      .attr("id", `player-${extraPlayerNum}-name`)
       .addClass("player-name-input")
       .attr("type", "text")
-      .val(`Player ${playerNum}`)
+      .val(`Player ${extraPlayerNum}`)
       .appendTo($inputArea);
     const $playerColorLabel = $("<label>")
-      .attr("for", `player-${playerNum}-color`)
-      .text(`Player ${playerNum} Color`)
+      .attr("for", `player-${extraPlayerNum}-color`)
+      .text(`Player ${extraPlayerNum} Color`)
       .appendTo($inputArea);
     const $playerColorInput = $("<input>")
-      .attr("id", `player-${playerNum}-color`)
+      .attr("id", `player-${extraPlayerNum}-color`)
       .addClass("player-color-input")
       .attr("type", "color")
-      .val(`${playerColors[playerNum]}`)
+      .val(`${ADDITIONAL_PLAYER_COLORS[extraPlayerNum]}`)
       .appendTo($inputArea);
-
-
-    playerNum++;
+    
+      extraPlayerNum++;
   }
 
 }
