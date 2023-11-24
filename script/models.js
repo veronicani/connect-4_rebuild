@@ -68,16 +68,24 @@ class Game {
    * Returns: An array of Player instances
    */
   getPlayers() {
+    //if this was at the top in ui.js
+    //the script would execute and find all CURRENT dom elements with matching classes
+    //but new elements created (i.e. additional players) will not be found
+    //have to find the player elements DURING the creation of the game
+    const $playerNameInputs = $(".player-name-input");
+    const $playerColorInputs = $(".player-color-input");
+
     console.log('getPlayers')
-    
+    console.log('$playerNameInputs: ', $playerNameInputs);
+
     const players = [];
     for (let i = 0; i < $playerNameInputs.length; i++) {
       //for each player
       //add $playerNameInputs[i].val(),
       //add $playerColorInputs[i].val()
-      const player = new Player (
+      const player = new Player(
         $playerNameInputs[i].value, $playerColorInputs[i].value
-        );
+      );
       //push to players [];
       players.push(player);
     }
@@ -112,7 +120,7 @@ class Game {
         return [y, x];
       }
     }
-    //if reached top, return false;
+    //if reached top, return undefined;
     console.log("no space available");
     return undefined;
   }
@@ -194,10 +202,22 @@ class Game {
       setTimeout(endGame, 1000);
     }
 
-    currentGame.currPlayer = currentGame.currPlayer === currentGame.players[0]
-      ? currentGame.players[1]
-      : currentGame.players[0];
+    //for 2 players only 
+    // currentGame.currPlayer = currentGame.currPlayer === currentGame.players[0]
+    //   ? currentGame.players[1]
+    //   : currentGame.players[0];
 
+    //if the current player is the last in the players
+    if (this.currPlayer === this.players[this.players.length - 1]) {
+      //current player is now the first player
+      this.currPlayer = this.players[0];
+      //else
+    } else {
+      //find the index of the current player
+      const currPlayerIdx = this.players.indexOf(this.currPlayer);
+      //current player is now the next player
+      this.currPlayer = this.players[currPlayerIdx + 1];
+    }
     console.log('switched current Player: ', currentGame.currPlayer);
   }
 }

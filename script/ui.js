@@ -5,12 +5,9 @@ let currentGame;
 
 // Find all DOM elements
 const $playerForm = $("#player-form");
-const $playerNameInputs = $(".player-name-input");
-const $playerColorInputs = $(".player-color-input");
-const $player1NameInput = $("#player-1-name");
-const $player1ColorInput = $("#player-1-color");
-const $player2NameInput = $("#player-2-name");
-const $player2ColorInput = $("#player-2-color");
+const $playerInputs = $("#player-inputs");
+
+const $addPlayer = $("#add-player");
 const $startBtn = $("#start-button");
 
 const $body = $("body");
@@ -134,7 +131,16 @@ async function endGame() {
   }
 
   $replayBtn.on("click", handleRestart);
-  //bonus, use Giphy API to generate a random victory gif?
+}
+
+/** A function that handles restarting the game upon game over. 
+ * It will clear the current game and hide the game over message.
+ * It will change the start button to say "Start"
+*/
+function handleRestart(evt) {
+  $gameOverWindow.hide();
+  $gameBoard.empty();
+  $startBtn.text("Start");
 }
 
 /** A function that handles the start of the game upon player form submission.
@@ -149,15 +155,55 @@ function startGame(evt) {
   makeHtmlBoard(currentGame);
 }
 
-/** A function that handles restarting the game upon game over. 
- * It will clear the current game and hide the game over message.
- * It will change the start button to say "Start"
-*/
-function handleRestart(evt) {
-  $gameOverWindow.hide();
-  $gameBoard.empty();
-  $startBtn.text("Start");
+/** A function that handles adding a new player input on the player form
+ * when the '+ Add player' link is clicked.
+ */
+let playerNum = 3;
+const playerColors = {
+  1: "#ff0000",
+  2: "#0000ff",
+  3: "#00ff00",
+  4: "#ffff00"
 }
 
+function addPlayerInput(evt) {
+  evt.preventDefault();
+
+  if (playerNum <= 4) {
+    const $inputArea = $("<div>")
+      .addClass("col-12 col-sm-6")
+      .appendTo($playerInputs);
+    const $playerNameLabel = $("<label>")
+      .attr("for", `player-${playerNum}-name`)
+      .text(`Player ${playerNum}`)
+      .appendTo($inputArea);
+    const $playerNameInput = $("<input>")
+      .attr("id", `player-${playerNum}-name`)
+      .addClass("player-name-input")
+      .attr("type", "text")
+      .val(`Player ${playerNum}`)
+      .appendTo($inputArea);
+    const $playerColorLabel = $("<label>")
+      .attr("for", `player-${playerNum}-color`)
+      .text(`Player ${playerNum} Color`)
+      .appendTo($inputArea);
+    const $playerColorInput = $("<input>")
+      .attr("id", `player-${playerNum}-color`)
+      .addClass("player-color-input")
+      .attr("type", "color")
+      .val(`${playerColors[playerNum]}`)
+      .appendTo($inputArea);
+
+
+    playerNum++;
+  }
+
+}
+
+
+
+$playerForm.on("click", "#add-player", addPlayerInput);
 $playerForm.on("submit", startGame);
+
 $gameBoard.on("click", ".top-cell", handleTopRowClick);
+
