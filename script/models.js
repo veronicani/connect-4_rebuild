@@ -61,20 +61,31 @@ class Game {
     }
     return matrix;
   }
-  //TODO: make accept multiple players -- no need to assign to variables
-  //just use a for loop
-  /** This function gets (currently only 2) new Player instances 
-   *   and assigns them to variables.
-   * 
-   * Accepts: number of players (integer)
+
+  /** This function makes a new Player instance for each player input received
+   *   from the player form and updates the current game's players property.
    * 
    * Returns: An array of Player instances
    */
   getPlayers() {
-    const p1 = Player.makePlayer($player1NameInput.val(), $player1ColorInput.val());
-    const p2 = Player.makePlayer($player2NameInput.val(), $player2ColorInput.val());
-    console.log('p1: ', p1, 'p2: ', p2);
-    return [p1, p2];
+    console.log('getPlayers')
+    
+    const players = [];
+    for (let i = 0; i < $playerNameInputs.length; i++) {
+      //for each player
+      //add $playerNameInputs[i].val(),
+      //add $playerColorInputs[i].val()
+      const player = new Player (
+        $playerNameInputs[i].value, $playerColorInputs[i].value
+        );
+      //push to players [];
+      players.push(player);
+    }
+    // const p1 = Player.makePlayer($player1NameInput.val(), $player1ColorInput.val());
+    // const p2 = Player.makePlayer($player2NameInput.val(), $player2ColorInput.val());
+    // console.log('p1: ', p1, 'p2: ', p2);
+    console.log('players: ', players);
+    return players;
   }
 
   /** A function that finds the next available spot for the column
