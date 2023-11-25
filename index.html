@@ -127,8 +127,26 @@
     </div>
   </section>
 
-  
-      <div class="row position-absolute top-50 start-50 translate-middle w-75">
+  <!-- Game Over Modal -->
+<div class="modal fade" id="gameOverModal" tabindex="-1" aria-labelledby="gameOverModalLabel" aria-hidden="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="gameOverModalLabel">Game Over!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="gameOverResult" class="modal-body modal-body__gameOver">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="replayButton" type="button" class="btn btn-primary" data-bs-dismiss="modal">Play again?</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Popup game over window before bootstrap -->
+      <!-- <div class="row position-absolute top-50 start-50 translate-middle w-75">
         <div class="col align-self-center">
           <div id="gameOverWindow" class="popup hidden">
             <h3>Game Over!</h3>
@@ -139,8 +157,8 @@
             <button id="replayButton" class="btn">Play again?</button>
           </div>
         </div>
-      </div>
-    </div>
+      </div> -->
+    
 
 
   <!-- Library JS and my JS -->

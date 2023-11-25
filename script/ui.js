@@ -20,7 +20,7 @@ const $startBtn = $("#start-button");
 
 const $body = $("body");
 const $gameBoard = $("#gameBoard");
-const $gameOverWindow = $("#gameOverWindow");
+const $gameOverModal = $("#gameOverModal");
 const $gameOverResult = $("#gameOverResult");
 const $replayBtn = $("#replayButton");
 
@@ -109,7 +109,7 @@ async function endGame() {
   console.log("endGame winner: ", currentGame.winner);
 
   $gameOverResult.empty();
-  $gameOverWindow.show();
+  $gameOverModal.modal("show");
   const $winnerMsg = $("<p>")
     .appendTo($gameOverResult);
 

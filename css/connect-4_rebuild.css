@@ -140,27 +140,7 @@ form a {
 }
 
 /* || GameOver */
-.popup {
-  /* gave absolute positioning via bootstrap */
-  /* position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  /* height: 300px; */
-  /* width: 400px; */
-  padding-block: 20px; 
-  /* overrides hidden class, which hides nav on start */
-  /* display: flex;
-  flex-direction: column; */
-  /* justify-content: center; */
-  background-color: var(--clr-primary);
-  border: 2px solid var(--clr-secondary);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.547);
-}
-
-.popup_inner {
-  width: 100%;
-  margin-block: 20px;
+.modal-body__gameOver {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -168,7 +148,7 @@ form a {
   background-color: var(--clr-wht-alpha);
 }
 
-.popup_inner p {
+.modal-body__gameOver p {
   font-family: 'Lilita One', sans-serif;
   font-size: 2rem;
   color: var(--clr-font-dark);
