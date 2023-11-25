@@ -182,16 +182,16 @@ class Game {
   */
   executeMove(x) {
 
-    const updatedCoords = currentGame.findSpotInCol(x);
+    const updatedCoords = this.findSpotInCol(x);
     if (updatedCoords === undefined) {
       return;
     }
 
     placeHtmlPiece(updatedCoords);
 
-    const winner = currentGame.checkForWin();
+    const winner = this.checkForWin();
     //when the top row doesn't have null, board is full
-    const boardIsFull = !currentGame.board[0].includes(null);
+    const boardIsFull = !this.board[0].includes(null);
     console.log("boardIsFull: ", boardIsFull);
 
     if (winner) {
@@ -218,7 +218,7 @@ class Game {
       //current player is now the next player
       this.currPlayer = this.players[currPlayerIdx + 1];
     }
-    console.log('switched current Player: ', currentGame.currPlayer);
+    console.log('switched current Player: ', this.currPlayer);
   }
 }
 
