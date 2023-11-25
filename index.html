@@ -15,80 +15,106 @@
 </head>
 
 <body class="py-5">
+  <!-- Title + Start new Game -->
   <header>
-    <!-- Title -->
     <div class="container">
       <div class="row">
         <div class="col-12">
           <h1>Connect 4</h1>
         </div>
-        <!-- Player Form -->
+        <!-- Button trigger Player Form Modal -->
         <div class="col-12">
-          <form action="" id="player-form" class="p-3">
-            <!-- Player Inputs -->
-            <div id="player-inputs" class="row">
-              <!-- Player 1 -->
-              <div class="input-area col-12 col-md-6">
-                <div class="player-input row mb-2 me-1 p-3">
-                  <!-- Name -->
-                  <div class="player-name col-12 mb-1">
-                    <label for="player-1-name">Player 1</label>
-                    <input id="player-1-name" class="player-name-input" type="text" value="Player 1">
-                  </div>
-                  <!-- Color + Remove -->
-                  <div class="col-12">
-                    <div class="row">
-                      <!-- Color -->
-                      <div class="player-color col-8">
-                        <label for="player-1-color">Player 1 Color</label>
-                        <input id="player-1-color" class="player-color-input" type="color" value="#ff0000">
-                      </div>
-                      <!-- Remove Btn -->
-                      <div class="col-4 align-self-end text-end hidden">
-                        <a href="">Remove</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Player 2 -->
-              <div class="input-area col-12 col-md-6">
-                <div class="player-input row mb-2 me-1 p-3">
-                  <!-- Name -->
-                  <div class="player-name col-12 mb-1">
-                    <label for="player-2-name">Player 2</label>
-                    <input id="player-2-name" class="player-name-input" type="text" value="Player 2">
-                  </div>
-                  <!-- Color + Remove -->
-                  <div class="col-12">
-                    <div class="row">
-                      <!-- Color -->
-                      <div class="player-color col-8">
-                        <label for="player-2-color">Player 2 Color</label>
-                        <input id="player-2-color" class="player-color-input" type="color" value="#0000ff">
-                      </div>
-                      <!-- Remove Btn -->
-                      <div class="col-4 align-self-end text-end hidden">
-                        <a href="">Remove</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Add Player + Start button -->
-            <div class="row justify-content-end text-end">
-              <div class="col-3">
-                <a href="" class="" id="add-player">+ Add player</a>
-              </div>
-              <div class="col-12 my-2">
-                <button class="btn" id="start-button" type="submit" value="submit">Start!</button>
-              </div>
-            </div>
-          </form>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playerFormModal">
+            New Game
+          </button>
+          <!-- TODO: add restart game button -->
         </div>
       </div>
+    </div>
   </header>
+
+  <!-- Player Form Modal -->
+  <div class="modal fade" id="playerFormModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="playerFormLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="playerFormLabel">Players</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Player Form -->
+          <div class="container-fluid">
+            <form action="" id="player-form" class="">
+              <!-- Player Inputs -->
+              <div id="player-inputs" class="row">
+                <!-- Player 1 -->
+                <div class="col-12">
+                  <div class="player-input row mb-2 me-1 p-3">
+                    <!-- Name -->
+                    <div class="player-name col-12 mb-1">
+                      <label for="player-1-name">Player 1</label>
+                      <input id="player-1-name" class="player-name-input" type="text" value="Player 1">
+                    </div>
+                    <!-- Color + Remove -->
+                    <div class="col-12">
+                      <div class="row">
+                        <!-- Color -->
+                        <div class="player-color col-8">
+                          <label for="player-1-color">Player 1 Color</label>
+                          <input id="player-1-color" class="player-color-input" type="color" value="#ff0000">
+                        </div>
+                        <!-- Remove Btn -->
+                        <div class="col-4 align-self-end text-end hidden">
+                          <a href="">Remove</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Player 2 -->
+                <div class="col-12">
+                  <div class="player-input row mb-2 me-1 p-3">
+                    <!-- Name -->
+                    <div class="player-name col-12 mb-1">
+                      <label for="player-2-name">Player 2</label>
+                      <input id="player-2-name" class="player-name-input" type="text" value="Player 2">
+                    </div>
+                    <!-- Color + Remove -->
+                    <div class="col-12">
+                      <div class="row">
+                        <!-- Color -->
+                        <div class="player-color col-8">
+                          <label for="player-2-color">Player 2 Color</label>
+                          <input id="player-2-color" class="player-color-input" type="color" value="#0000ff">
+                        </div>
+                        <!-- Remove Btn -->
+                        <div class="col-4 align-self-end text-end hidden">
+                          <a href="">Remove</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Player-->
+              <div class="row justify-content-end text-end">
+                <div class="col-3">
+                  <a href="" class="" id="add-player">+ Add player</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="start-button" form="player-form" type="submit" value="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Start
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <section id="gameArea">
     <div class="container position-relative">
@@ -98,6 +124,10 @@
           </table>
         </div>
       </div>
+    </div>
+  </section>
+
+  
       <div class="row position-absolute top-50 start-50 translate-middle w-75">
         <div class="col align-self-center">
           <div id="gameOverWindow" class="popup hidden">
@@ -111,9 +141,10 @@
         </div>
       </div>
     </div>
-  </section>
+
 
   <!-- Library JS and my JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/jquery"></script>
   <script src="script/models.js"></script>
   <script src="script/ui.js"></script>

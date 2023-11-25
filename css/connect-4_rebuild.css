@@ -71,6 +71,12 @@ header {
 }
 
 /* || Player Form */
+.modal-header,
+.modal-body,
+.modal-footer {
+  background-color: var(--clr-primary); 
+}
+
 form {
   font-family: Helvetica, sans-serif;
   /* background-color: var(--clr-primary-lt); */

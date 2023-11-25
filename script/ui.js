@@ -22,7 +22,6 @@ const $body = $("body");
 const $gameBoard = $("#gameBoard");
 const $gameOverWindow = $("#gameOverWindow");
 const $gameOverResult = $("#gameOverResult");
-// const $gameOverGifArea = $("#gameOverGif");
 const $replayBtn = $("#replayButton");
 
 /******************************************************************************
@@ -142,22 +141,19 @@ async function endGame() {
 }
 
 /** A function that handles restarting the game upon game over. 
- * It will clear the current game and hide the game over message.
- * It will change the start button to say "Start"
+ * It will clear the current game and start a new Game with the same form values.
+ * 
 */
 function handleRestart(evt) {
-  $gameOverWindow.hide();
-  $gameBoard.empty();
-  $startBtn.text("Start");
+  currentGame = new Game();
+  makeHtmlBoard(currentGame);
 }
 
 /** A function that handles the start of the game upon player form submission.
- * Upon clicking start, the start button will change to say "Restart"
+ * Upon clicking start, a new Game with the player form values will be created.
 */
 function startGame(evt) {
   evt.preventDefault();
-
-  $startBtn.text("Restart");
 
   currentGame = new Game();
   makeHtmlBoard(currentGame);
@@ -173,7 +169,7 @@ function addPlayerInput(evt) {
   evt.preventDefault();
   console.log('extraPlayerNum: ', extraPlayerNum);
   if (extraPlayerNum > PLAYER_MAX) return;
-
+//TODO: change class names
   const $inputArea = $("<div>")
     .addClass("input-area col-12 col-md-6")
     .appendTo($playerInputs);
