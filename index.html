@@ -15,60 +15,103 @@
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <div class="row justify-content-center">
-        <h1>Connect 4</h1>
+  <header>
+    <!-- Title -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Connect 4</h1>
+        </div>
+        <!-- Player Form -->
+        <div class="col-12">
+          <form action="" id="player-form" class="p-3">
+            <!-- Player Inputs -->
+            <div id="player-inputs" class="row">
+              <!-- Player 1 -->
+              <div class="col-12 col-md-6">
+                <div class="player-input row mb-2 mx-1 p-3">
+                  <!-- Name -->
+                  <div class="player-name col-12 mb-1">
+                    <label for="player-1-name">Player 1</label>
+                    <input id="player-1-name" class="player-name-input" type="text" value="Player 1">
+                  </div>
+                  <!-- Color + Remove -->
+                  <div class="col-12">
+                    <div class="row">
+                      <!-- Color -->
+                      <div class="player-color col-8">
+                        <label for="player-1-color">Player 1 Color</label>
+                        <input id="player-1-color" class="player-color-input" type="color" value="#ff0000">
+                      </div>
+                      <!-- Remove Btn -->
+                      <div class="col-4 align-self-end text-end">
+                        <a href="">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Player 2 -->
+              <div class="col-12 col-md-6">
+                <div class="player-input row mb-2 mx-1 p-3">
+                  <!-- Name -->
+                  <div class="player-name col-12 mb-1">
+                    <label for="player-2-name">Player 2</label>
+                    <input id="player-2-name" class="player-name-input" type="text" value="Player 2">
+                  </div>
+                  <!-- Color + Remove -->
+                  <div class="col-12">
+                    <div class="row">
+                      <!-- Color -->
+                      <div class="player-color col-8">
+                        <label for="player-2-color">Player 2 Color</label>
+                        <input id="player-2-color" class="player-color-input" type="color" value="#0000ff">
+                      </div>
+                      <!-- Remove Btn -->
+                      <div class="col-4 align-self-end text-end">
+                        <a href="">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Add Player + Start button -->
+            <div class="row justify-content-end text-end">
+              <div class="col-3">
+                <a href="" class="" id="add-player">+ Add player</a>
+              </div>
+              <div class="col-12 my-2">
+                <button class="btn" id="start-button" type="submit" value="submit">Start!</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="row align-items-center">
-        <form action="" id="player-form" class="container">
-          <div id="player-inputs" class="row align-items-center">
-            <div class="col-12 col-sm-6">
-              <label for="player-1-name">Player 1</label>
-              <input id="player-1-name" class="player-name-input" type="text" value="Player 1">
-              <label for="player-1-color">Player 1 Color</label>
-              <input id="player-1-color" class="player-color-input" type="color" value="#ff0000">
-            </div>
-            <div class="col-12 col-sm-6">
-              <label for="player-2-name">Player 2</label>
-              <input id="player-2-name" class="player-name-input"type="text" value="Player 2">
-              <label for="player-2-color">Player 2 Color</label>
-              <input id="player-2-color" class="player-color-input" type="color" value="#0000FF">
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col">
-              <a href="" class="" id="add-player">+ Add player</a>
-              <button class="btn" id="start-button" type="submit" value="submit">Start!</button>
-            </div>
-          </div>
-        </form>
-    </header>
-  </div>
-  <div class="container position-relative">
-    <div class="row">
-      <div class="col-12 align-self-center">
-        <table id="gameBoard" class="">
-        </table>
+  </header>
+
+  <section id="gameArea">
+    <div class="container position-relative">
+      <div class="row">
+        <div class="col-12 align-self-center">
+          <table id="gameBoard" class="">
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="row position-absolute top-50 start-50 translate-middle w-75">
-      <div class="col align-self-center">
-        <div id="gameOverWindow" class="popup hidden">
-          <h3>Game Over!</h3>
-          <div id="gameOverResult" class="popup_inner">
-            <p>Testing wins!</p>
-            <img id="gameOverGif">
-              <!-- <img src="https://media1.giphy.com/media/8PEfCbYgGzpIBsYNo7/giphy-downsized.gif?cid=482277c2rpjxzxsicxr832fmzogpzc4142oiau0h9crdbk81&ep=v1_gifs_random&rid=giphy-downsized.gif&ct=g" alt=""> -->
-            </img>
+      <div class="row position-absolute top-50 start-50 translate-middle w-75">
+        <div class="col align-self-center">
+          <div id="gameOverWindow" class="popup hidden">
+            <h3>Game Over!</h3>
+            <div id="gameOverResult" class="popup_inner">
+              <p>Testing wins!</p>
+              <img id="gameOverGif"></img>
+            </div>
+            <button id="replayButton" class="btn">Play again?</button>
           </div>
-          <button id="replayButton" class="btn">Play again?</button>
         </div>
       </div>
     </div>
-  </div>
-
-
+  </section>
 
   <!-- Library JS and my JS -->
   <script src="https://unpkg.com/jquery"></script>

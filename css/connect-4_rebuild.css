@@ -73,17 +73,28 @@ header {
 /* || Player Form */
 form {
   font-family: Helvetica, sans-serif;
-  background-color: var(--clr-primary-lt);
+  /* background-color: var(--clr-primary-lt); */
 }
 
-form p,
-form h4 {
-  color: var(--clr-font-dark);
+form .player-input {
+  /* border: 1px solid white; */
+  background-color: var(--clr-primary-lt);
+  border-radius: 10px;
 }
+
+form .player-name-input {
+  width: 100%;
+}
+
+form .player-color-input {
+  padding: 0;
+}
+
 
 form a {
   color: var(--clr-font);
   font-style: italic;
+  font-size: smaller;
 }
 
 /* || Gameboard */
@@ -159,7 +170,7 @@ form a {
 }
 
 #gameOverGif{
-  width: 50%;
-  border: 2px solid black;
+  width: 70%;
+  border: 2px solid var(--clr-secondary);
 }
 
