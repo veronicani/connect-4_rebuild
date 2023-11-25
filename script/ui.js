@@ -175,36 +175,60 @@ function addPlayerInput(evt) {
   if (extraPlayerNum > PLAYER_MAX) return;
 
   const $inputArea = $("<div>")
-    .addClass("col-12 col-sm-6")
+    .addClass("input-area col-12 col-md-6")
     .appendTo($playerInputs);
+  
+  const $playerInput = $("<div>")
+    .addClass("player-input row mb-2 me-1 p-3")
+    .appendTo($inputArea);
+  
+  const $playerNameArea = $("<div>")
+    .addClass("player-name col-12 mb-1")
+    .appendTo($playerInput);
 
   const $playerNameLabel = $("<label>")
     .attr("for", `player-${extraPlayerNum}-name`)
     .text(`Player ${extraPlayerNum}`)
-    .appendTo($inputArea);
+    .appendTo($playerNameArea);
   const $playerNameInput = $("<input>")
     .attr("id", `player-${extraPlayerNum}-name`)
     .addClass("player-name-input")
     .attr("type", "text")
     //using val() will not add the value to the html
     .attr("value", `Player ${extraPlayerNum}`)
-    .appendTo($inputArea);
+    .appendTo($playerNameArea);
+  
+  const $playerColorAndRemoveCol = $("<div>")
+    .addClass("col-12")
+    .appendTo($playerInput)
+  
+  const $playerColorAndRemoveRow = $("<div>")
+    .addClass("row")
+    .appendTo($playerColorAndRemoveCol);
+
+  const $playerColorArea = $("<div>")
+    .addClass("player-color col-8")
+    .appendTo($playerColorAndRemoveRow);
 
   const $playerColorLabel = $("<label>")
     .attr("for", `player-${extraPlayerNum}-color`)
     .text(`Player ${extraPlayerNum} Color`)
-    .appendTo($inputArea);
+    .appendTo($playerColorArea);
   const $playerColorInput = $("<input>")
     .attr("id", `player-${extraPlayerNum}-color`)
     .addClass("player-color-input")
     .attr("type", "color")
     .attr("value", `${ADDITIONAL_PLAYER_COLORS[extraPlayerNum]}`)
-    .appendTo($inputArea);
+    .appendTo($playerColorArea);
+
+  const $removePlayerArea = $("<div>")
+    .addClass("col-4 align-self-end text-end")
+    .appendTo($playerColorAndRemoveRow)
 
   const $removePlayer = $("<a>")
     .attr("href", "")
     .text("Remove")
-    .appendTo($inputArea)
+    .appendTo($removePlayerArea)
     .on("click", removePlayerInput);
 
   extraPlayerNum++;
@@ -215,7 +239,7 @@ function removePlayerInput(evt) {
   console.log('removePlayerInput');
   evt.preventDefault();
   const $evtTarget = $(evt.target);
-  const $inputArea = $evtTarget.closest(".col-12.col-sm-6")
+  const $inputArea = $evtTarget.closest(".input-area")
     .remove();
 
   extraPlayerNum--;
