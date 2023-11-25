@@ -105,6 +105,7 @@ form a {
 
 /* || Gameboard */
 #gameBoard {
+  position: relative;
   width: 100%;
   border-collapse: separate;
   aspect-ratio: 1/1;
@@ -113,12 +114,12 @@ form a {
 .top-cell, 
 .body-cell {
   position: relative;
-  height: 70px;
   background-color: var(--clr-wht-alpha);
 }
 
 .top-cell {
   border: 1px dotted gray;
+  height: 50px;
 }
 
 .top-cell:hover {
