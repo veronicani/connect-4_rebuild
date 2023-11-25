@@ -169,14 +169,14 @@ function addPlayerInput(evt) {
   evt.preventDefault();
   console.log('extraPlayerNum: ', extraPlayerNum);
   if (extraPlayerNum > PLAYER_MAX) return;
-//TODO: change class names
-  const $inputArea = $("<div>")
-    .addClass("input-area col-12 col-md-6")
+  
+  const $inputCol = $("<div>")
+    .addClass("col-12")
     .appendTo($playerInputs);
   
   const $playerInput = $("<div>")
-    .addClass("player-input row mb-2 me-1 p-3")
-    .appendTo($inputArea);
+    .addClass("player-input row mb-2 p-3")
+    .appendTo($inputCol);
   
   const $playerNameArea = $("<div>")
     .addClass("player-name col-12 mb-1")
